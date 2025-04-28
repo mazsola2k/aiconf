@@ -5,7 +5,8 @@
 #Build cuda_12.8.r12.8/compiler.35583870_0
 #https://pytorch.org/get-started/locally/#windows-pip
 #pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
-#pip install accelerate
+#pip install accelerate  huggingface-hub
+#huggingface-cli login
 import time
 import psutil  # For CPU and RAM monitoring
 from transformers import pipeline, AutoModelForCausalLM, AutoTokenizer
@@ -64,9 +65,15 @@ def test_llama3_pipeline():
 
         # Step 3: Test the pipeline with a basic input
         print("\nTesting pipeline...")
-        test_input = "What is the result of 2 + 2?"
+        test_input = "2 + 2 ="
         start_time = time.time()
-        output = text_pipeline(test_input, max_length=50, num_return_sequences=1)
+        output = text_pipeline(
+            test_input,
+            max_length=50,
+            num_return_sequences=1,
+            eos_token_id=tokenizer.eos_token_id,  # Use the tokenizer's end-of-sequence token
+            truncation=True  # Explicitly enable truncation
+        )
         end_time = time.time()
 
         # Display the output and processing time

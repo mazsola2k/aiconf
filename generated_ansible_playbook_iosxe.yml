@@ -5,29 +5,28 @@ The playbook should:
 2. Ensure the configuration is saved to the device.
 Provide the playbook in YAML format.
 
-### Examples
+### Setup
 
+Create an inventory file called `inventory.yml` with the following:
 ```
+[ios_devices]
+ios_device1
+ios_device2
+ios_device3
+```
+
+### Solution
+
+1. Include the `ios_config` module in the playbook.
+2. Set the hostname of the device.
+3. Ensure the configuration is saved to the device.
+
+```yaml
 ---
-- name: Set hostname on an IOS-XE network device
-  ios_config:
-    commands:
-      - hostname {{ inventory_hostname }}
-  delegate_to: localhost
-```
-
-### Requirements
-
-This role requires Ansible 2.10 or higher.
-
-### Variables
-
-| Name | Required | Type | Default | Description |
-| ---- | -------- | ---- | ------- | ----------- |
-| commands | yes | list | - | The commands to send to the device. |
-
-### Example Playbook
-
-```
----
-- name: Set host
+- hosts: ios_devices
+  vars:
+    hostname: "{{ inventory_hostname }}"
+  tasks:
+    - name: Set hostname
+      ios_config:
+        hostname:

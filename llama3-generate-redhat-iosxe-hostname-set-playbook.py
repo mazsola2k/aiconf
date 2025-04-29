@@ -41,6 +41,8 @@ Provide the playbook in YAML format.
 
 ### Example playbook in separate files - generated_ansible_playbook_redhat.yml and generated_ansible_playbook_iosxe.yml
 
+"""
+
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
 

@@ -1,0 +1,33 @@
+
+Generate an Ansible playbook to set the hostname of an IOS-XE network device.
+The playbook should:
+1. Use the `ios_config` module to set the hostname.
+2. Ensure the configuration is saved to the device.
+Provide the playbook in YAML format.
+
+### Examples
+
+```
+---
+- name: Set hostname on an IOS-XE network device
+  ios_config:
+    commands:
+      - hostname {{ inventory_hostname }}
+  delegate_to: localhost
+```
+
+### Requirements
+
+This role requires Ansible 2.10 or higher.
+
+### Variables
+
+| Name | Required | Type | Default | Description |
+| ---- | -------- | ---- | ------- | ----------- |
+| commands | yes | list | - | The commands to send to the device. |
+
+### Example Playbook
+
+```
+---
+- name: Set host

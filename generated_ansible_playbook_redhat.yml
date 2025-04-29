@@ -1,0 +1,26 @@
+
+Generate an Ansible playbook to change the hostname of a Red Hat server.
+The playbook should:
+1. Use the `hostname` module to set the hostname.
+2. Update the `/etc/hostname` file.
+3. Update the `/etc/hosts` file to map the hostname to the loopback address (127.0.0.1).
+Provide the playbook in YAML format.
+
+### Example playbook
+```yaml
+---
+- name: Change hostname
+  hosts: localhost
+  vars:
+    hostname: newhostname
+  tasks:
+    - name: Update hostname
+      hostname: "{{ hostname }}"
+    - name: Update hosts file
+      hosts:
+        - "{{ hostname }}"
+      update_hostnames: true
+      add_host:
+        name: "{{ hostname }}"
+        addresses: [ "{{ loopback_address }}" ]
+```

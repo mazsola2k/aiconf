@@ -5,28 +5,32 @@ The playbook should:
 2. Ensure the configuration is saved to the device.
 Provide the playbook in YAML format.
 
-### Setup
+### Example Playbook
 
-Create an inventory file called `inventory.yml` with the following:
 ```
-[ios_devices]
-ios_device1
-ios_device2
-ios_device3
-```
-
-### Solution
-
-1. Include the `ios_config` module in the playbook.
-2. Set the hostname of the device.
-3. Ensure the configuration is saved to the device.
-
-```yaml
 ---
-- hosts: ios_devices
+- hosts: ioxe
+  gather_facts: no
   vars:
-    hostname: "{{ inventory_hostname }}"
+    ios_hostname: "{{ inventory_hostname }}-ios"
+
   tasks:
-    - name: Set hostname
+    - name: Set the hostname
       ios_config:
-        hostname:
+        hostname: "{{ ios_hostname }}"
+      delegate_to: localhost
+```
+
+### Expected Playbook Output
+
+```
+TASK [Set the hostname]
+ok: [iodev]
+```
+
+### Example Playbook with Inventory
+
+```
+---
+- hosts: ioxe
+  gather_facts: no

@@ -6,27 +6,25 @@ The playbook should:
 3. Update the `/etc/hosts` file to map the hostname to the loopback address (127.0.0.1).
 Provide the playbook in YAML format.
 
+The playbook should be named `hostname.yml`.
+
+## Solution
+
 ```yaml
 ---
-- hosts: all
-  become: true
-  vars:
-    new_hostname: 'new_hostname'
-  tasks:
-    - name: Set hostname
-      hostname:
-        name: "{{ new_hostname }}"
-      delegate_to: localhost
-    - name: Update /etc/hostname
-      file:
-        path: /etc/hostname
-        state: present
-        backup: no
-      delegate_to: localhost
-    - name: Update /etc/hosts
-      file:
-        path: /etc/hosts
-        state: present
-        backup: no
-      delegate_to: localhost
+- name: Set the hostname
+  hostname:
+    name: "{{ inventory_hostname }}"
+
+- name: Update the hostname in /etc/hostname
+  file:
+    path: /etc/hostname
+    state: present
+    mode: 644
+
+- name: Update the hosts file
+  copy:
+    src: hosts
+    dest: /etc/hosts
+    mode: 644
 ```

@@ -1,10 +1,18 @@
 """
-# Llama-3 Generate Ansible Playbook for Red Hat and IOS-XE
-@mazsola2k
-This script generates Ansible playbooks for changing the hostname of a Red Hat server
-and setting the hostname of an IOS-XE network device using a pre-trained LLM model from HuggingFace.
+# CLI Executive Summary
+This script generates YAML-formatted Ansible playbooks for:
+1. Changing the hostname of a Red Hat server.
+2. Setting the hostname of an IOS-XE network  device.
 
-# Includes proactive CLI updates for remaining time during generation in MM:SS format.
+Key Features:
+- Uses Hugging Face's LLaMA-2 model for playbook generation.
+- Runs on GPU (if available) or CPU with mixed precision for efficiency.
+- Provides real-time progress updates in the CLI:
+  - Tokens generated.
+  - Estimated remaining time in MM:SS format.
+- Saves the generated playbooks to:
+  - `generated_ansible_playbook_redhat.yml`
+  - `generated_ansible_playbook_iosxe.yml`
 """
 
 from transformers import AutoModelForCausalLM, AutoTokenizer, StoppingCriteria, StoppingCriteriaList

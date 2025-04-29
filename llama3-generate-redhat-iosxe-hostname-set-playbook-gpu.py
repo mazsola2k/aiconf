@@ -2,7 +2,7 @@
 # CLI Executive Summary
 This script generates YAML-formatted Ansible playbooks for:
 1. Changing the hostname of a Red Hat server.
-2. Setting the hostname of an IOS-XE network  device.
+2. Setting the hostname of an IOS-XE network device.
 
 Key Features:
 - Uses Hugging Face's LLaMA-2 model for playbook generation.

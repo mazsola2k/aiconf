@@ -39,65 +39,7 @@ The playbook should:
 3. Update the `/etc/hosts` file to map the hostname to the loopback address (127.0.0.1).
 Provide the playbook in YAML format.
 
-### Example playbook
-```yaml
----
-- name: Change hostname
-  hosts: localhost
-  vars:
-    hostname: newhostname
-  tasks:
-    - name: Update hostname
-      hostname: "{{ hostname }}"
-    - name: Update hosts file
-      hosts:
-        - "{{ hostname }}"
-      update_hostnames: true
-      add_host:
-        name: "{{ hostname }}"
-        addresses: [ "{{ loopback_address }}" ]
-```
-
-Red Hat playbook written to: generated_ansible_playbook_redhat.yml
-Generating the playbook for the IOS-XE network device...
-Playbook generation for the IOS-XE network device completed.
-Generated Ansible Playbook for IOS-XE network device:
-
-Generate an Ansible playbook to set the hostname of an IOS-XE network device.
-The playbook should:
-1. Use the `ios_config` module to set the hostname.
-2. Ensure the configuration is saved to the device.
-Provide the playbook in YAML format.
-
-### Examples
-
-```
----
-- name: Set hostname on an IOS-XE network device
-  ios_config:
-    commands:
-      - hostname {{ inventory_hostname }}
-  delegate_to: localhost
-```
-
-### Requirements
-
-This role requires Ansible 2.10 or higher.
-
-### Variables
-
-| Name | Required | Type | Default | Description |
-| ---- | -------- | ---- | ------- | ----------- |
-| commands | yes | list | - | The commands to send to the device. |
-
-### Example Playbook
-
-```
----
-- name: Set host
-IOS-XE playbook written to: generated_ansible_playbook_iosxe.yml
-"""
-
+### Example playbook in separate files - generated_ansible_playbook_redhat.yml and generated_ansible_playbook_iosxe.yml
 
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import torch
